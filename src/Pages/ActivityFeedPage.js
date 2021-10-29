@@ -41,7 +41,6 @@ function ActivityFeedPage() {
 
   return (
     <Center flex={1}>
-      <Box> Fetch API</Box>
       {isLoading ? (
         <Spinner accessibilityLabel="Loading posts" />
       ) : (
