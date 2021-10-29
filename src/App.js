@@ -1,46 +1,44 @@
-import logo from "./logo.svg";
 import {
   Box,
   Image,
   Text,
-  Link,
   HStack,
   Heading,
   Switch,
   useColorMode,
   VStack,
   Code,
+  Center,
 } from "native-base";
+import "./css/body.css";
+import "./css/app.css";
+import "./css/header.css";
+import Header from "./components/Header";
+import ActivityFeedPage from "./Pages/ActivityFeedPage";
+import ArchivePage from "./Pages/ArchivePage";
 
 function App() {
   const { colorMode } = useColorMode();
 
   return (
-    <Box
-      bg={colorMode === "light" ? "coolGray.50" : "coolGray.900"}
-      minHeight="100vh"
-      justifyContent="center"
-      px={4}
-    >
-      <VStack space={5} alignItems="center">
-        <Image
-          source={{ uri: logo }}
-          resizeMode="contain"
-          size={220}
-          alt="NativeBase logo"
-        />
-        <Heading size="lg">Welcome to NativeBase</Heading>
-        <Text>
-          Edit <Code>src/App.js</Code> and save to reload.
-        </Text>
-        <Link href="https://docs.nativebase.io" isExternal>
-          <Text color="primary.500" underline fontSize={"xl"}>
-            Learn NativeBase
-          </Text>
-        </Link>
-        <ToggleDarkMode />
-      </VStack>
-    </Box>
+    <>
+      <Header />
+      <Center>
+        <Box
+          bg={colorMode === "light" ? "coolGray.50" : "coolGray.900"}
+          w="375px"
+          h="100%"
+          justifyContent="center"
+          px={4}
+        >
+          <VStack space={5} alignItems="center">
+            <Heading size="lg">Welcome to Air</Heading>
+            <ToggleDarkMode />
+            <ActivityFeedPage />
+          </VStack>
+        </Box>
+      </Center>
+    </>
   );
 }
 
