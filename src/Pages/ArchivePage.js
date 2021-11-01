@@ -27,6 +27,7 @@ function ArchivePage() {
     getAllActivity();
   }, []);
 
+  // Get all activity
   const getAllActivity = async () => {
     try {
       const response = await axios.get(`${config.GET_ALL_ACTIVITY}`);
@@ -38,6 +39,7 @@ function ArchivePage() {
     }
   };
 
+  //reset all archived activity
   const resetAllArchive = async () => {
     try {
       await axios.get(`${config.REST_ALL_ACTIVITY}`);
@@ -48,6 +50,7 @@ function ArchivePage() {
     }
   };
 
+  //Get activity by id to display in modal
   const getActivityById = async (id) => {
     await axios
       .get(`${config.GET_ALL_ACTIVITY}/${id}`)
@@ -61,6 +64,7 @@ function ArchivePage() {
       });
   };
 
+  //On single click update activity status to archived
   const onPressUpdateActivityById = async (id) => {
     // setIsArchive(false);
     // console.log(isArchive);
@@ -212,13 +216,13 @@ function ArchivePage() {
                   {activity.length === 0 && (
                     <Text>No archived activity found</Text>
                   )}
-
+                  {/* Modal window dipslayes details of activity */}
                   {modalVisible && (
                     <Modal
                       isOpen={modalVisible}
                       onClose={() => setModalVisible(false)}
                     >
-                      <Modal.Content maxWidth="400px">
+                      <Modal.Content maxWidth="450px">
                         <Modal.CloseButton />
                         <Modal.Header>Activity details</Modal.Header>
                         <Modal.Body>
@@ -362,12 +366,15 @@ function ArchivePage() {
                       </Modal.Content>
                     </Modal>
                   )}
+                  {/* Modal window END*/}
                 </div>
               );
             })}
           </div>
         )}
       </div>
+
+      {/* Button for Resetall */}
       <div>
         <Link mb={2} onPress={resetAllArchive}>
           <Box
@@ -381,6 +388,7 @@ function ArchivePage() {
           </Box>
         </Link>
       </div>
+      {/* Button for Resetall End*/}
     </>
   );
 }

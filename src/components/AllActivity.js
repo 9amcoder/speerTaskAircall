@@ -68,7 +68,7 @@ function AllActivity(props) {
                   isOpen={showSingleActivityModal}
                   onClose={() => setShowSingleActivityModal(false)}
                 >
-                  <Modal.Content maxWidth="400px">
+                  <Modal.Content maxWidth="450px">
                     <Modal.CloseButton />
                     <Modal.Header>Activity details</Modal.Header>
                     <Modal.Body>
