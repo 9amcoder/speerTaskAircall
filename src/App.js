@@ -1,13 +1,11 @@
 import {
   Box,
-  Image,
   Text,
   HStack,
   Heading,
   Switch,
   useColorMode,
   VStack,
-  Code,
   Center,
 } from "native-base";
 import "./css/body.css";
@@ -16,6 +14,7 @@ import "./css/header.css";
 import Header from "./components/Header";
 import ActivityFeedPage from "./Pages/ActivityFeedPage";
 import ArchivePage from "./Pages/ArchivePage";
+import { Route, Link } from "wouter";
 
 function App() {
   const { colorMode } = useColorMode();
@@ -31,10 +30,35 @@ function App() {
           justifyContent="center"
           px={4}
         >
-          <VStack space={5} alignItems="center">
+          <VStack mb={5} space={3} alignItems="center">
             <Heading size="lg">Welcome to Air</Heading>
             <ToggleDarkMode />
-            <ActivityFeedPage />
+            <HStack space={5}>
+              <Box
+                p={1}
+                borderWidth={2}
+                borderColor="cyan.500"
+                borderTopWidth={5}
+              >
+                <Link href="/">
+                  <Text>All Activity</Text>
+                </Link>
+              </Box>
+
+              <Box
+                p={1}
+                borderWidth={2}
+                borderColor="cyan.500"
+                borderTopWidth={5}
+              >
+                <Link href="/archive">
+                  <Text>Archive</Text>
+                </Link>
+              </Box>
+            </HStack>
+            <Route path="/archive" component={ArchivePage} />
+            <Route path="/" component={ActivityFeedPage} />
+            {/* <ActivityFeedPage /> */}
           </VStack>
         </Box>
       </Center>
@@ -45,8 +69,8 @@ function App() {
 function ToggleDarkMode() {
   const { colorMode, toggleColorMode } = useColorMode();
   return (
-    <HStack space={2}>
-      <Text>Dark</Text>
+    <HStack alignItems="center" space={2}>
+      <Text fontSize="xs">Dark</Text>
       <Switch
         isChecked={colorMode === "light" ? true : false}
         onToggle={toggleColorMode}
@@ -54,7 +78,7 @@ function ToggleDarkMode() {
           colorMode === "light" ? "switch to dark mode" : "switch to light mode"
         }
       />
-      <Text>Light</Text>
+      <Text fontSize="xs">Light</Text>
     </HStack>
   );
 }
