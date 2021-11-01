@@ -62,8 +62,8 @@ function App() {
           </VStack>
         </Box>
       </Center>
-      <Center>
-        <Text>{"\u00A9"}Steve Sultan </Text>
+      <Center mt={1}>
+        <a style={{ color: "white" }}>{"\u00A9"}Steve Sultan </a>
       </Center>
     </>
   );
