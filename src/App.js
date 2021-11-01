@@ -31,7 +31,7 @@ function App() {
           px={4}
         >
           <VStack mb={5} space={3} alignItems="center">
-            <Heading size="lg">Welcome to Air</Heading>
+            <Heading size="lg">Welcome to AirCall</Heading>
             <ToggleDarkMode />
             <HStack space={5}>
               <Box
