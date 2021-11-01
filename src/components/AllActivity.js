@@ -365,8 +365,8 @@ function AllActivity(props) {
 
   return (
     <>
+      <Text>All Calls</Text>
       {DisplayAllActivities(props)}
-      {/* <ActivityModalWindow activityDataById={activityDataById} /> */}
     </>
   );
 }

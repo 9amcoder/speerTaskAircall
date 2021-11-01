@@ -85,6 +85,9 @@ function ArchivePage() {
           <Spinner accessibilityLabel="Loading posts" />
         ) : (
           <div>
+            <Center>
+              <Text>Archived Calls {"\u00A9"}SteveSultan.com </Text>
+            </Center>
             {activityData.map((activity) => {
               return (
                 <div key={activity.id.toString()}>
@@ -366,7 +369,7 @@ function ArchivePage() {
         )}
       </div>
       <div>
-        <Link onPress={resetAllArchive}>
+        <Link mb={2} onPress={resetAllArchive}>
           <Box
             mt={2}
             p={1}

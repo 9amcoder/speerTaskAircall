@@ -62,6 +62,9 @@ function App() {
           </VStack>
         </Box>
       </Center>
+      <Center>
+        <Text>{"\u00A9"}Steve Sultan </Text>
+      </Center>
     </>
   );
 }
