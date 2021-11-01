@@ -20,8 +20,6 @@ function AllActivity(props) {
   const [activityDataById, setActivityDataById] = React.useState([]);
   const [showSingleActivityModal, setShowSingleActivityModal] =
     React.useState(false);
-  const [getSingleActivityError, setGetSingleActivityError] =
-    React.useState(false);
 
   const DisplayAllActivities = (props) => {
     const { activitiesData } = props;
@@ -38,7 +36,6 @@ function AllActivity(props) {
         })
         .catch((err) => {
           console.log(err);
-          setGetSingleActivityError(true);
         });
     };
 
