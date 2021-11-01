@@ -128,7 +128,7 @@ function AllActivity(props) {
                           )}
                           {activityDataById.call_type === "voicemail" && (
                             <Center
-                              bg="#fb923c"
+                              bg="#7c2d12"
                               _text={{
                                 color: "white",
                                 fontWeight: "700",
@@ -273,7 +273,7 @@ function AllActivity(props) {
                       )}
                       {activity.call_type === "voicemail" && (
                         <Center
-                          bg="#fb923c"
+                          bg="#7c2d12"
                           _text={{
                             color: "white",
                             fontWeight: "700",
