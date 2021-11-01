@@ -143,7 +143,7 @@ function ArchivePage() {
                           )}
                           {activity.call_type === "voicemail" && (
                             <Center
-                              bg="#7c2d12"
+                              bg="#0284c7"
                               _text={{
                                 color: "white",
                                 fontWeight: "700",
@@ -273,7 +273,7 @@ function ArchivePage() {
                               )}
                               {selectedActivity.call_type === "voicemail" && (
                                 <Center
-                                  bg="#7c2d12"
+                                  bg="#0284c7"
                                   _text={{
                                     color: "white",
                                     fontWeight: "700",
