@@ -86,7 +86,7 @@ function ArchivePage() {
         ) : (
           <div>
             <Center>
-              <Text>Archived Calls {"\u00A9"}SteveSultan.com </Text>
+              <Text>Archived Calls </Text>
             </Center>
             {activityData.map((activity) => {
               return (
