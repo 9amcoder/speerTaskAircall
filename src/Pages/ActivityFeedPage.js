@@ -1,21 +1,7 @@
 import * as React from "react";
 import axios from "axios";
 import { config } from "../config/config";
-import {
-  Box,
-  Image,
-  Text,
-  Link,
-  HStack,
-  Heading,
-  Switch,
-  useColorMode,
-  VStack,
-  Code,
-  Center,
-  FlatList,
-  Spinner,
-} from "native-base";
+import { Text, Center, Spinner } from "native-base";
 import AllActivity from "../components/AllActivity";
 
 function ActivityFeedPage() {

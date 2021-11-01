@@ -11,39 +11,21 @@ import {
   Stack,
   HStack,
   Image,
-  Heading,
   Modal,
   Button,
 } from "native-base";
 import Moment from "moment";
-import ActivityModalWindow from "./ActivityModalWindow";
 
 function AllActivity(props) {
-  // console.log(props);
-
   const [activityDataById, setActivityDataById] = React.useState([]);
   const [showSingleActivityModal, setShowSingleActivityModal] =
     React.useState(false);
   const [getSingleActivityError, setGetSingleActivityError] =
     React.useState(false);
-  const [isArchived, setIsArchived] = React.useState(false);
 
   const DisplayAllActivities = (props) => {
     const { activitiesData } = props;
-    // const [updatedActivity, setUpdatedActivity] = React.useState([...props]);
 
-    // React.useEffect(() => {
-    //   axios
-    //     .get(`${config.GET_ALL_ACTIVITY}`)
-    //     .then((response) => {
-    //       setUpdatedActivity(response.data);
-    //     })
-    //     .catch((error) => {
-    //       console.log(error);
-    //     });
-    // }, []);
-
-    //Formatted Date and time
     Moment.locale("en");
 
     //get activities by id
@@ -51,9 +33,6 @@ function AllActivity(props) {
       await axios
         .get(`${config.GET_ALL_ACTIVITY}/${id}`)
         .then((res) => {
-          console.log(res.data);
-          console.log(res.data.id);
-          // const parsedData = JSON.parse(res.data);
           setActivityDataById(res.data);
           setShowSingleActivityModal(true);
         })
@@ -67,25 +46,21 @@ function AllActivity(props) {
 
     //update activity by id send JSON request body with axios POST method
 
-    // const onPressUpdateActivityById = async (id) => {
-    //   setIsArchived(true);
-
-    //   await axios
-    //     .post(`${config.GET_ALL_ACTIVITY}/${id}`, {
-    //       is_archived: isArchived,
-    //     })
-    //     .then((res) => {
-    //       console.log(res);
-    //       console.log(res.data);
-    //     })
-    //     .catch((err) => {
-    //       console.log(err);
-    //     });
-    // };
+    const onPressUpdateActivityById = async (id) => {
+      await axios
+        .post(`${config.GET_ALL_ACTIVITY}/${id}`, {
+          is_archived: true,
+        })
+        .then((res) => {
+          window.location.reload(true);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    };
 
     if (activitiesData.length > 0) {
       return activitiesData.map((activity, index) => {
-        console.log(activity.is_archived);
         return (
           <div key={activity.id.toString()}>
             <Center flex={1}>
@@ -113,34 +88,61 @@ function AllActivity(props) {
                           <AspectRatio ratio={16 / 1.5}>
                             <Image
                               source={{
-                                uri: "https://www.holidify.com/images/cmsuploads/compressed/Bangalore_citycover_20190613234056.jpg",
+                                uri: "https://i.postimg.cc/y6m5fszr/Blurred-Landscape-Background-Twitter-Header-2.png",
                               }}
                               alt="image"
                             />
                           </AspectRatio>
-                          <Center
-                            bg="violet.500"
-                            _text={{
-                              color: "white",
-                              fontWeight: "700",
-                              fontSize: "xs",
-                            }}
-                            position="absolute"
-                            bottom={0}
-                            px="3"
-                            py="1.5"
-                          >
-                            {/* {activity.call_type} */}
-                            {activityDataById.call_type === "missed" && (
+
+                          {activityDataById.call_type === "missed" && (
+                            <Center
+                              bg="#e11d48"
+                              _text={{
+                                color: "white",
+                                fontWeight: "700",
+                                fontSize: "xs",
+                              }}
+                              position="absolute"
+                              bottom={0}
+                              px="3"
+                              py="1.5"
+                            >
                               <Text>Missed Call</Text>
-                            )}
-                            {activityDataById.call_type === "answered" && (
+                            </Center>
+                          )}
+                          {activityDataById.call_type === "answered" && (
+                            <Center
+                              bg="#059669"
+                              _text={{
+                                color: "white",
+                                fontWeight: "700",
+                                fontSize: "xs",
+                              }}
+                              position="absolute"
+                              bottom={0}
+                              px="3"
+                              py="1.5"
+                            >
                               <Text>Answered</Text>
-                            )}
-                            {activityDataById.call_type === "voicemail" && (
+                            </Center>
+                          )}
+                          {activityDataById.call_type === "voicemail" && (
+                            <Center
+                              bg="#fb923c"
+                              _text={{
+                                color: "white",
+                                fontWeight: "700",
+                                fontSize: "xs",
+                              }}
+                              position="absolute"
+                              bottom={0}
+                              px="3"
+                              py="1.5"
+                            >
                               <Text>Voicemail</Text>
-                            )}
-                          </Center>
+                            </Center>
+                          )}
+                          {/* </Center> */}
                         </Box>
 
                         <Stack p="2" space={1}>
@@ -176,9 +178,20 @@ function AllActivity(props) {
                           >
                             <VStack alignItems="start">
                               <Text
+                                fontSize="xs"
+                                _light={{ color: "#14532d" }}
+                                _dark={{ color: "#38bdf8" }}
+                                fontWeight="500"
+                                ml="-0.5"
+                                mt="-1"
+                              >
+                                {activityDataById.direction}
+                              </Text>
+                              <Text
                                 _light={{ color: "gray.500" }}
                                 _dark={{ color: "#d1fae5" }}
                                 fontWeight="400"
+                                fontSize="xs"
                               >
                                 Duration: {activityDataById.duration} min
                               </Text>
@@ -186,6 +199,7 @@ function AllActivity(props) {
                                 _light={{ color: "gray.500" }}
                                 _dark={{ color: "#d1fae5" }}
                                 fontWeight="400"
+                                fontSize="xs"
                               >
                                 {Moment(activityDataById.created_at).format(
                                   "DD MMM YYYY, h:mm:ss a"
@@ -219,41 +233,67 @@ function AllActivity(props) {
                       <AspectRatio ratio={16 / 1.5}>
                         <Image
                           source={{
-                            uri: "https://www.holidify.com/images/cmsuploads/compressed/Bangalore_citycover_20190613234056.jpg",
+                            uri: "https://i.postimg.cc/y6m5fszr/Blurred-Landscape-Background-Twitter-Header-2.png",
                           }}
                           alt="image"
                         />
                       </AspectRatio>
 
-                      <Center
-                        bg="violet.500"
-                        _text={{
-                          color: "white",
-                          fontWeight: "700",
-                          fontSize: "xs",
-                        }}
-                        position="absolute"
-                        bottom={0}
-                        px="3"
-                        py="1.5"
-                      >
-                        {/* {activity.call_type} */}
-                        {activity.call_type === "missed" && (
+                      {activity.call_type === "missed" && (
+                        <Center
+                          bg="#e11d48"
+                          _text={{
+                            color: "white",
+                            fontWeight: "700",
+                            fontSize: "xs",
+                          }}
+                          position="absolute"
+                          bottom={0}
+                          px="3"
+                          py="1.5"
+                        >
                           <Text>Missed Call</Text>
-                        )}
-                        {activity.call_type === "answered" && (
+                        </Center>
+                      )}
+                      {activity.call_type === "answered" && (
+                        <Center
+                          bg="#059669"
+                          _text={{
+                            color: "white",
+                            fontWeight: "700",
+                            fontSize: "xs",
+                          }}
+                          position="absolute"
+                          bottom={0}
+                          px="3"
+                          py="1.5"
+                        >
                           <Text>Answered</Text>
-                        )}
-                        {activity.call_type === "voicemail" && (
+                        </Center>
+                      )}
+                      {activity.call_type === "voicemail" && (
+                        <Center
+                          bg="#fb923c"
+                          _text={{
+                            color: "white",
+                            fontWeight: "700",
+                            fontSize: "xs",
+                          }}
+                          position="absolute"
+                          bottom={0}
+                          px="3"
+                          py="1.5"
+                        >
                           <Text>Voicemail</Text>
-                        )}
-                      </Center>
+                        </Center>
+                      )}
+                      {/* </Center> */}
                     </Box>
 
                     <Stack p="2" space={1}>
                       <Stack space={1}>
                         <HStack space={5}>
-                          <Text
+                          {/* <Text
                             fontSize="xs"
                             _light={{ color: "violet.500" }}
                             _dark={{ color: "violet.300" }}
@@ -262,7 +302,7 @@ function AllActivity(props) {
                             mt="-1"
                           >
                             To: {activity.to}
-                          </Text>
+                          </Text> */}
                           <Text
                             fontSize="xs"
                             _light={{ color: "#14532d" }}
@@ -275,34 +315,35 @@ function AllActivity(props) {
                           </Text>
                         </HStack>
                       </Stack>
-                      <Text fontSize="xs">Via: {activity.via}</Text>
+                      {/* <Text fontSize="xs">Via: {activity.via}</Text> */}
                       <HStack
                         alignItems="center"
                         space={4}
                         justifyContent="space-between"
                       >
                         <VStack alignItems="start">
-                          <Text
+                          {/* <Text
                             _light={{ color: "gray.500" }}
                             _dark={{ color: "#d1fae5" }}
                             fontWeight="400"
                           >
                             Duration: {activity.duration} min
-                          </Text>
+                          </Text> */}
                           <HStack space={12}>
                             <Text
                               _light={{ color: "gray.500" }}
                               _dark={{ color: "#d1fae5" }}
                               fontWeight="400"
+                              fontSize="xs"
                             >
                               {Moment(activity.created_at).format(
                                 "DD MMM YYYY, h:mm:ss a"
                               )}
                             </Text>
                             <Button
-                              // onPress={() =>
-                              //   onPressUpdateActivityById(activity.id)
-                              // }
+                              onPress={() =>
+                                onPressUpdateActivityById(activity.id)
+                              }
                               size="xs"
                             >
                               Archive
